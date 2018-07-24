@@ -1,4 +1,5 @@
 library(ggplot2)
+library(scales)
 
 hrData_1335_mean$time <- gsub('.{4}$', '', hrData_1335_mean$time) # remove miliseconds
 hrData_1335_mean["dateTime"] <- as.POSIXct(paste("2017-07-29", hrData_1335_mean$time), format="%Y-%m-%d %H:%M:%S") # create a date/time POSIXct column
