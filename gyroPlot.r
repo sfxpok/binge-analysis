@@ -1,8 +1,9 @@
 library(ggplot2)
 library(scales)
+library(lubridate)
 
 generalData_1335_mean$time <- gsub('.{4}$', '', generalData_1335_mean$time) # remove miliseconds
-generalData_1335_mean["dateTime"] <- as.POSIXct(paste("2017-07-29", generalData_1335_mean$time), format="%Y-%m-%d %H:%M:%S") # create a date/time POSIXct column
+generalData_1335_mean["dateTime"] <- as.POSIXct(paste(mdy(generalData_1335_mean$date), generalData_1335_mean$time), format="%Y-%m-%d %H:%M:%S") # create a date/time POSIXct column
 generalData_1335_mean$hr <- as.numeric(levels(generalData_1335_mean$hr))[generalData_1335_mean$hr] # convert factor to numeric datatype
 
 generalData_1335_mean$gyro.x <-as.numeric(levels(generalData_1335_mean$gyro.x)[generalData_1335_mean$gyro.x]) # convert factor to numeric datatype
