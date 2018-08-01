@@ -2,18 +2,30 @@ library(ggplot2)
 library(scales)
 library(lubridate)
 
-generalData_1335_mean$time <- gsub('.{4}$', '', generalData_1335_mean$time) # remove miliseconds
-generalData_1335_mean["dateTime"] <- as.POSIXct(paste(mdy(generalData_1335_mean$date), generalData_1335_mean$time), format="%Y-%m-%d %H:%M:%S") # create a date/time POSIXct column
-generalData_1335_mean$hr <- as.numeric(levels(generalData_1335_mean$hr))[generalData_1335_mean$hr] # convert factor to numeric datatype
+##########################################################
+########### Make sure that the time and date   ###########
+########### column are in "character" datatype ###########
+##########################################################
 
-generalData_1335_mean$accel.x <-as.numeric(levels(generalData_1335_mean$accel.x)[generalData_1335_mean$accel.x]) # convert factor to numeric datatype
-generalData_1335_mean$accel.y <-as.numeric(levels(generalData_1335_mean$accel.y)[generalData_1335_mean$accel.y]) # convert factor to numeric datatype
-generalData_1335_mean$accel.z <-as.numeric(levels(generalData_1335_mean$accel.z)[generalData_1335_mean$accel.z]) # convert factor to numeric datatype
+bWatchData = generalData_1310_mean
 
-ggplot(generalData_1335_mean, aes(x=dateTime, group=1)) +
-  geom_line(data=generalData_1335_mean, aes(y=accel.x, color="x"), size = 0.5) +
-  geom_line(data=generalData_1335_mean, aes(y=accel.y, color="y"), size = 0.5) +
-  geom_line(data=generalData_1335_mean, aes(y=accel.z, color="z"), size = 0.5) +
+### Data treatment ###
+
+colnames(bWatchData) <- make.names(names(bWatchData))
+bWatchData$time <- gsub('.{4}$', '', bWatchData$time) # remove miliseconds
+bWatchData["dateTime"] <- as.POSIXct(paste(date(bWatchData$date), bWatchData$time), format="%Y-%m-%d %H:%M:%S") # create a date/time POSIXct column
+# bWatchData$hr <- as.numeric(levels(bWatchData$hr))[bWatchData$hr] # convert factor to numeric datatype
+
+# bWatchData$accel.x <-as.numeric(levels(bWatchData$accel.x)[bWatchData$accel.x]) # convert factor to numeric datatype
+# bWatchData$accel.y <-as.numeric(levels(bWatchData$accel.y)[bWatchData$accel.y]) # convert factor to numeric datatype
+# bWatchData$accel.z <-as.numeric(levels(bWatchData$accel.z)[bWatchData$accel.z]) # convert factor to numeric datatype
+
+######################
+
+ggplot(bWatchData, aes(x=dateTime, group=1)) +
+  geom_line(data=bWatchData, aes(y=accel.x, color="x"), size = 0.5) +
+  geom_line(data=bWatchData, aes(y=accel.y, color="y"), size = 0.5) +
+  geom_line(data=bWatchData, aes(y=accel.z, color="z"), size = 0.5) +
   ggtitle("Accelerometer") +
   labs(x = "Time") +
   scale_x_datetime(breaks = date_breaks("15 min"), minor_breaks=date_breaks("15 min"), labels=date_format("%H:%M")) + 
