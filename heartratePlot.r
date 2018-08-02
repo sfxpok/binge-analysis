@@ -20,6 +20,7 @@ bWatchData["dateTime"] <- as.POSIXct(paste(date(bWatchData$date), bWatchData$tim
 
 ggplot(bWatchData, aes(x=dateTime, y=hr, group=1)) +
   geom_line(size = 0.5, colour = "red") +
+  # geom_smooth(method = "lm") + # single linear regression
   ggtitle("Heartrate") +
   labs(x = "Time", y = "BPM") +
   scale_x_datetime(breaks = date_breaks("15 min"), minor_breaks=date_breaks("15 min"), labels=date_format("%H:%M")) + 
