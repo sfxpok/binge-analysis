@@ -7,11 +7,11 @@ library(lubridate)
 ########### column are in "character" datatype ###########
 ##########################################################
 
-bWatchData = generalData_1310_mean
+bWatchData = generalData_1310_mean # change this after importing data
 
-### Data treatment ###
+### data treatment ###
 
-colnames(bWatchData) <- make.names(names(bWatchData))
+colnames(bWatchData) <- make.names(names(bWatchData)) # making sure the dataframe columns do not have spaces
 bWatchData$time <- gsub('.{4}$', '', bWatchData$time) # remove miliseconds
 bWatchData["dateTime"] <- as.POSIXct(paste(date(bWatchData$date), bWatchData$time), format="%Y-%m-%d %H:%M:%S") # create a date/time POSIXct column
 # bWatchData$hr <- as.numeric(levels(bWatchData$hr))[bWatchData$hr] # convert factor to numeric datatype
@@ -23,14 +23,14 @@ bWatchData["dateTime"] <- as.POSIXct(paste(date(bWatchData$date), bWatchData$tim
 ######################
 
 ggplot(bWatchData, aes(x=dateTime, group=1)) +
-  geom_line(data=bWatchData, aes(y=gyro.x, color="x"), size = 0.5) +
-  geom_line(data=bWatchData, aes(y=gyro.y, color="y"), size = 0.5) +
-  geom_line(data=bWatchData, aes(y=gyro.z, color="z"), size = 0.5) +
+  geom_line(data=bWatchData, aes(y=gyro_x, color="x"), size = 0.5) +
+  geom_line(data=bWatchData, aes(y=gyro_y, color="y"), size = 0.5) +
+  geom_line(data=bWatchData, aes(y=gyro_z, color="z"), size = 0.5) +
   ggtitle("Gyroscope") +
   labs(x = "Time") +
   scale_x_datetime(breaks = date_breaks("15 min"), minor_breaks=date_breaks("15 min"), labels=date_format("%H:%M")) + 
   # scale_y_continuous(limits = c(65, 100)) +
-  scale_y_continuous(limits = c(-60, 60)) + 
+  # scale_y_continuous(limits = c(-60, 60)) + 
   scale_color_manual(values = c("blue","red","black")) +
   theme_bw() + 
   theme(axis.title.y=element_blank(), legend.title=element_blank())

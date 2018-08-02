@@ -7,11 +7,11 @@ library(lubridate)
 ########### column are in "character" datatype ###########
 ##########################################################
 
-bWatchData = generalData_1310_mean
+bWatchData = generalData_1310_mean # change this after importing data
 
-### Data treatment ###
+### data treatment ###
 
-colnames(bWatchData) <- make.names(names(bWatchData))
+colnames(bWatchData) <- make.names(names(bWatchData)) # making sure the dataframe columns do not have spaces
 bWatchData$time <- gsub('.{4}$', '', bWatchData$time) # remove miliseconds
 bWatchData["dateTime"] <- as.POSIXct(paste(date(bWatchData$date), bWatchData$time), format="%Y-%m-%d %H:%M:%S") # create a date/time POSIXct column
 # bWatchData$hr <- as.numeric(levels(bWatchData$hr))[bWatchData$hr] # convert factor to numeric datatype
