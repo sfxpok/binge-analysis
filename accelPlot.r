@@ -7,7 +7,7 @@ library(lubridate)
 ########### column are in "character" datatype ###########
 ##########################################################
 
-bWatchData = generalData_1310_mean # change this after importing data
+bWatchData = generalData_1310_mean # change the second variable to the imported data variable
 
 ### data treatment ###
 

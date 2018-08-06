@@ -7,7 +7,7 @@ library(lubridate)
 ########### column are in "character" datatype ###########
 ##########################################################
 
-bWatchData = generalData_1310_mean # change this after importing data
+bWatchData = generalData_1310_mean # change the second variable to the imported data variable
 
 ### data treatment ###
 
@@ -20,9 +20,8 @@ bWatchData["dateTime"] <- as.POSIXct(paste(date(bWatchData$date), bWatchData$tim
 
 ggplot(bWatchData, aes(x=dateTime, y=hr, group=1)) +
   geom_line(size = 0.5, colour = "red") +
-  # geom_smooth(method = "lm") + # single linear regression
+  # geom_smooth(method = "lm") + # linear smooth
   ggtitle("Heartrate") +
   labs(x = "Time", y = "BPM") +
   scale_x_datetime(breaks = date_breaks("15 min"), minor_breaks=date_breaks("15 min"), labels=date_format("%H:%M")) + 
-  # scale_y_continuous(limits = c(65, 100)) +
   theme_bw()
