@@ -14,6 +14,7 @@ bWatchData = generalData_1310_mean # change the second variable to the imported 
 colnames(bWatchData) <- make.names(names(bWatchData)) # making sure the dataframe columns do not have spaces
 bWatchData$time <- gsub('.{4}$', '', bWatchData$time) # remove miliseconds
 bWatchData["dateTime"] <- as.POSIXct(paste(date(bWatchData$date), bWatchData$time), format="%Y-%m-%d %H:%M:%S") # create a date/time POSIXct column
+# bWatchData["dateTime"] <- as.POSIXct(paste(mdy(bWatchData$date), bWatchData$time), format="%Y-%m-%d %H:%M:%S") # use this if anything goes wrong
 # bWatchData$hr <- as.numeric(levels(bWatchData$hr))[bWatchData$hr] # convert factor to numeric datatype
 
 # bWatchData$accel.x <-as.numeric(levels(bWatchData$accel.x)[bWatchData$accel.x]) # convert factor to numeric datatype
